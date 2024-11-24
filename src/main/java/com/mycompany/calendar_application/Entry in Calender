@@ -5,3 +5,52 @@ public class Main {
         ui.showCalendar();
     }
 }
+//User Interface of the Callender
+import java.util.Scanner;
+
+public class UI {
+    private Calendar calendar;
+
+    public UI() {
+        this.calendar = new Calendar();
+    }
+
+    public void showCalendar() {
+        Scanner scanner = new Scanner(System.in);
+        
+        while (true) {
+            System.out.println("1. Add Event");
+            System.out.println("2. View Events");
+            System.out.println("3. Exit");
+            System.out.print("Choose an option: ");
+            int option = scanner.nextInt();
+            scanner.nextLine();  // Consume newline
+            
+            switch (option) {
+                case 1:
+                    System.out.print("Enter event name: ");
+                    String name = scanner.nextLine();
+                    System.out.print("Enter event date (YYYY-MM-DD): ");
+                    String date = scanner.nextLine();
+                    System.out.print("Enter event time (HH:MM): ");
+                    String time = scanner.nextLine();
+                    System.out.print("Enter reminder time in minutes: ");
+                    int reminderMinutes = scanner.nextInt();
+                    scanner.nextLine();  // Consume newline
+
+                    Event event = new Event(name, date, time, reminderMinutes);
+                    calendar.addEvent(event);
+                    break;
+                case 2:
+                    calendar.viewEvents();
+                    break;
+                case 3:
+                    calendar.saveToFile();
+                    System.exit(0);
+                    break;
+                default:
+                    System.out.println("Invalid option.");
+            }
+        }
+    }
+}
